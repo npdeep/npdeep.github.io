@@ -1,144 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
-  <title>Testing Jupyter Files</title>
-
-
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="origin" />
-  <meta name="generator" content="Pelican" />
-<link href="https://npdeep.github.io/best-tool-jupyter.html" rel="canonical" />
-  <!-- Feed -->
-        <link href="https://npdeep.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bits and Qubits Full Atom Feed" />
-          <link href="https://npdeep.github.io/feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="Bits and Qubits Categories Atom Feed" />
-
-  <link href="https://npdeep.github.io/theme/css/style.css" type="text/css" rel="stylesheet" />
-
-  <!-- Code highlight color scheme -->
-      <link href="https://npdeep.github.io/theme/css/code_blocks/github.css" rel="stylesheet">
-
-    <!-- CSS specified by the user -->
-
-
-    <link href="https://npdeep.github.io/extras/custom.css" type="text/css" rel="stylesheet" />
-
-  <!-- Custom fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-
-
-    <meta name="description" content="How to use Jupyter in Pelican?">
-
-    <meta name="author" content="Pradeep Niroula">
-
-    <meta name="tags" content="tool">
-    <meta name="tags" content="software">
-    <meta name="tags" content="best">
-
-
-
-
-<!-- Open Graph -->
-<meta property="og:site_name" content="Bits and Qubits"/>
-<meta property="og:title" content="Testing Jupyter Files"/>
-<meta property="og:description" content="How to use Jupyter in Pelican?"/>
-<meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://npdeep.github.io/best-tool-jupyter.html"/>
-<meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2020-07-17 00:00:00-05:00"/>
-<meta property="article:modified_time" content=""/>
-<meta property="article:author" content="https://npdeep.github.io/author/pradeep-niroula.html">
-<meta property="article:section" content="tools"/>
-<meta property="article:tag" content="tool"/>
-<meta property="article:tag" content="software"/>
-<meta property="article:tag" content="best"/>
-<meta property="og:image" content="https://npdeep.github.io/theme/images/post-bg.jpg">
-
-<!-- Twitter Card -->
-
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "name": "Testing Jupyter Files",
-  "headline": "Testing Jupyter Files",
-  "datePublished": "2020-07-17 00:00:00-05:00",
-  "dateModified": "",
-  "author": {
-    "@type": "Person",
-    "name": "Pradeep Niroula",
-    "url": "https://npdeep.github.io/author/pradeep-niroula.html"
-  },
-  "image": "https://npdeep.github.io/theme/images/post-bg.jpg",
-  "url": "https://npdeep.github.io/best-tool-jupyter.html",
-  "description": "How to use Jupyter in Pelican?"
-}
-</script>
-</head>
-<!-- TODO : Body class -->
-<body class="home-template">
-
-<nav id="menu">
-  <a class="close-button">Close</a>
-  <div class="nav-wrapper">
-    <p class="nav-label">Menu</p>
-    <ul>
-
-
-    </ul>
-  </div>
-</nav>
-    <!-- Progressbar -->
-    <div class="progress-container">
-        <span class="progress-bar"></span>
-    </div>
-
-    <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header id="post-header" >
-      <div class="inner">
-        <nav id="navigation">
-            <span id="home-button" class="nav-button">
-                <a class="home-button" href="https://npdeep.github.io/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
-            </span>
-          <span id="menu-button" class="nav-button">
-            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
-          </span>
-        </nav>
-        <h1 class="post-title">Testing Jupyter Files</h1>
-        <!-- TODO : Proper class for headline -->
-        <span class="post-meta">
-                <a href="https://npdeep.github.io/author/pradeep-niroula.html">Pradeep Niroula</a>
-            | <time datetime="Fri 17 July 2020">Fri 17 July 2020</time>
-        </span>
-        <!-- TODO : Modified check -->
-      </div>
-    </header>
-
-  <section id="wrapper">
-    <a class="hidden-close"></a>
-
-    <!-- Post content -->
-    <main class="content" role="main">
-        <article class="post">
-        <div class="inner">
-            <section class="post-content">
-                <style type="text/css">/*!
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Bits and Qubits - tools</title><link href="https://npdeep.github.io/" rel="alternate"></link><link href="https://npdeep.github.io/feeds/tools.atom.xml" rel="self"></link><id>https://npdeep.github.io/</id><updated>2020-07-21T12:00:00-05:00</updated><entry><title>Testing With a Markdown Article</title><link href="https://npdeep.github.io/best-tool.html" rel="alternate"></link><published>2020-07-21T12:00:00-05:00</published><updated>2020-07-21T12:00:00-05:00</updated><author><name>Pradeep Niroula</name></author><id>tag:npdeep.github.io,2020-07-21:/best-tool.html</id><summary type="html">&lt;p&gt;How to use Pelican to write an article?&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Using Pelican&lt;/h1&gt;
+&lt;p&gt;First article. Hope it rocks. 
+...&lt;/p&gt;</content><category term="tools"></category><category term="tool"></category><category term="software"></category><category term="best"></category></entry><entry><title>Testing Jupyter Files</title><link href="https://npdeep.github.io/best-tool-jupyter.html" rel="alternate"></link><published>2020-07-17T00:00:00-05:00</published><updated>2020-07-17T00:00:00-05:00</updated><author><name>Pradeep Niroula</name></author><id>tag:npdeep.github.io,2020-07-17:/best-tool-jupyter.html</id><summary type="html">&lt;p&gt;How to use Jupyter in Pelican?&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -500,7 +363,7 @@ div.unrecognized_cell .inner_cell a:hover {
   text-decoration: none;
 }
 @media (max-width: 540px) {
-  div.unrecognized_cell > div.prompt {
+  div.unrecognized_cell &gt; div.prompt {
     display: none;
   }
 }
@@ -553,19 +416,19 @@ div.input_prompt {
   color: #303F9F;
   border-top: 1px solid transparent;
 }
-div.input_area > div.highlight {
+div.input_area &gt; div.highlight {
   margin: 0.4em;
   border: none;
   padding: 0px;
   background-color: transparent;
 }
-div.input_area > div.highlight > pre {
+div.input_area &gt; div.highlight &gt; pre {
   margin: 0px;
   border: none;
   padding: 0px;
   background-color: transparent;
 }
-/* The following gets added to the <head> if it is detected that the user has a
+/* The following gets added to the &lt;head&gt; if it is detected that the user has a
  * monospace font with inconsistent normal/bold/italic height.  See
  * notebookmain.js.  Such fonts will have keywords vertically offset with
  * respect to the rest of the text.  The user should select a better font.
@@ -626,7 +489,7 @@ div.input_area > div.highlight > pre {
 }
 /*
 
-Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Original style from softwaremaniacs.org (c) Ivan Sagalaev &lt;Maniac@SoftwareManiacs.Org&gt;
 Adapted from GitHub theme
 
 */
@@ -870,7 +733,7 @@ div.output_area img.unconfined,
 div.output_area svg.unconfined {
   max-width: none;
 }
-div.output_area .mglyph > img {
+div.output_area .mglyph &gt; img {
   max-width: none;
 }
 /* This is needed to protect the pre formating from global settings such
@@ -1108,7 +971,7 @@ div.text_cell {
   align-items: stretch;
 }
 @media (max-width: 540px) {
-  div.text_cell > div.prompt {
+  div.text_cell &gt; div.prompt {
     display: none;
   }
 }
@@ -1180,8 +1043,8 @@ h6:hover .anchor-link {
   font-size: 100%;
   font-style: italic;
 }
-</style>
-<style type="text/css"> .highlight pre  .hll { background-color: #ffffcc }
+&lt;/style&gt;
+&lt;style type="text/css"&gt; .highlight pre  .hll { background-color: #ffffcc }
  .highlight pre   { background: #f8f8f8; }
  .highlight pre  .c { color: #408080; font-style: italic } /* Comment */
  .highlight pre  .err { border: 1px solid #FF0000 } /* Error */
@@ -1249,42 +1112,42 @@ h6:hover .anchor-link {
  .highlight pre  .vg { color: #19177C } /* Name.Variable.Global */
  .highlight pre  .vi { color: #19177C } /* Name.Variable.Instance */
  .highlight pre  .vm { color: #19177C } /* Name.Variable.Magic */
- .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */</style><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Header">Header<a class="anchor-link" href="#Header">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Checking if Latex works just as well
+ .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h1 id="Header"&gt;Header&lt;a class="anchor-link" href="#Header"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Checking if Latex works just as well
 $$i\hbar \frac{\partial }{\partial t}|{\psi}\rangle = H|{\psi}\rangle$$
 What about laplacian equation
-$$\nabla^2\Phi = 0$$</p>
+$$\nabla^2\Phi = 0$$&lt;/p&gt;
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">some_random_code</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s2">&quot;Some Random Stuff&quot;</span>
-</pre></div>
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[2]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;some_random_code&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Some Random Stuff&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
-    </div>
-</div>
-</div>
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-</div>
+&lt;/div&gt;
  
 
 
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
     mathjaxscript.type = 'text/javascript';
@@ -1311,57 +1174,5 @@ $$\nabla^2\Phi = 0$$</p>
         "}); ";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-</script>
-
-            </section>
-
-            <section class="post-info">
-                <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=Testing Jupyter Files&amp;url=https://npdeep.github.io/best-tool-jupyter.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
-                    </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://npdeep.github.io/best-tool-jupyter.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
-                    </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=https://npdeep.github.io/best-tool-jupyter.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
-                    </a>
-                    <div class="clear"></div>
-                </div>
-
-                <aside class="post-tags">
-<a href="https://npdeep.github.io/tag/tool.html">tool</a><a href="https://npdeep.github.io/tag/software.html">software</a><a href="https://npdeep.github.io/tag/best.html">best</a>                </aside>
-
-                <div class="clear"></div>
-
-
-                </section>
-
-
-                <aside class="post-nav">
-                    <div class="clear"></div>
-                </aside>
-
-            </div>
-        </article>
-    </main>
-      <!-- TODO : Body class -->
-    <div id="body-class" style="display: none;" class=""></div>
-
-    <footer id="footer">
-      <div class="inner">
-        <section class="credits">
-
-
-          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
-          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
-        </section>
-      </div>
-    </footer>
-  </section>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script type="text/javascript" src="https://npdeep.github.io/theme/js/script.js"></script>
-
-</body>
-</html>
+&lt;/script&gt;
+</content><category term="tools"></category><category term="tool"></category><category term="software"></category><category term="best"></category></entry></feed>
