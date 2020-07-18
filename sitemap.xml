@@ -5,84 +5,77 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://npdeep.github.io/</loc>
-<lastmod>2020-07-17T21:50:20-00:00</lastmod>
+<lastmod>2020-07-18T00:10:50-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://npdeep.github.io/tags.html</loc>
-<lastmod>2020-07-17T21:50:20-00:00</lastmod>
+<lastmod>2020-07-18T00:10:50-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://npdeep.github.io/categories.html</loc>
-<lastmod>2020-07-17T21:50:20-00:00</lastmod>
+<lastmod>2020-07-18T00:10:50-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://npdeep.github.io/authors.html</loc>
-<lastmod>2020-07-17T21:50:20-00:00</lastmod>
+<lastmod>2020-07-18T00:10:50-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://npdeep.github.io/archives.html</loc>
-<lastmod>2020-07-17T21:50:20-00:00</lastmod>
+<lastmod>2020-07-18T00:10:50-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://npdeep.github.io/best-tool.html</loc>
-<lastmod>2020-07-21T12:00:00-05:00</lastmod>
-<changefreq>always</changefreq>
-<priority>1</priority>
-</url>
-
-<url>
-<loc>https://npdeep.github.io/best-tool-jupyter.html</loc>
+<loc>https://npdeep.github.io/matrix-inversion-gf2.html</loc>
 <lastmod>2020-07-17T00:00:00-05:00</lastmod>
 <changefreq>always</changefreq>
 <priority>1</priority>
 </url>
 
 <url>
-<loc>https://npdeep.github.io/category/tools.html</loc>
-<lastmod>2020-07-21T12:00:00-05:00</lastmod>
+<loc>https://npdeep.github.io/category/algorithm.html</loc>
+<lastmod>2020-07-17T00:00:00-05:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://npdeep.github.io/tag/tool.html</loc>
-<lastmod>2020-07-21T12:00:00-05:00</lastmod>
+<loc>https://npdeep.github.io/tag/algorithm.html</loc>
+<lastmod>2020-07-17T00:00:00-05:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://npdeep.github.io/tag/software.html</loc>
-<lastmod>2020-07-21T12:00:00-05:00</lastmod>
+<loc>https://npdeep.github.io/tag/linear-algebra.html</loc>
+<lastmod>2020-07-17T00:00:00-05:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://npdeep.github.io/tag/best.html</loc>
-<lastmod>2020-07-21T12:00:00-05:00</lastmod>
+<loc>https://npdeep.github.io/tag/finite-fields.html</loc>
+<lastmod>2020-07-17T00:00:00-05:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://npdeep.github.io/author/pradeep-niroula.html</loc>
-<lastmod>2020-07-21T12:00:00-05:00</lastmod>
+<lastmod>2020-07-17T00:00:00-05:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
