@@ -1113,7 +1113,7 @@ h6:hover .anchor-link {
  .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Recently, while working with stabilizer states and &lt;a href="https://en.wikipedia.org/wiki/Graph_state"&gt;graph states&lt;/a&gt;, I had to take an inverse of a matrix in GF(2). I was told that &lt;a href="https://www.sagemath.org/"&gt;SageMath&lt;/a&gt; is great for finite-field operations for Python. But, I didn't want to install a humungous package for a simple function like matrix inversion.&lt;/p&gt;
+&lt;p&gt;Recently, while working with stabilizer states and &lt;a href="https://en.wikipedia.org/wiki/Graph_state"&gt;graph states&lt;/a&gt;, I had to take an inverse of a matrix in GF(2). I was told that &lt;a href="https://www.sagemath.org/"&gt;SageMath&lt;/a&gt; is great for finite-field operations in Python. But, I didn't want to install a humungous package for a simple function like matrix inversion.&lt;/p&gt;
 &lt;p&gt;It is neither a particularly challenging nor a very interesting problem to solve but it is good enough for a first post in a blog.&lt;/p&gt;
 
 &lt;/div&gt;
@@ -1123,10 +1123,25 @@ h6:hover .anchor-link {
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;We are given a matrix $A$ whose elements $A_{ij} \in \{0, 1\}$. We would like to find an inverse $A^{-1}$ such that&lt;/p&gt;
-$$A A^{-1} = A^{-1}A = \mathbb{I} \mod 2$$&lt;p&gt;The simplest way of calculating $A^{-1}$ is with &lt;a href="https://en.wikipedia.org/wiki/Gaussian_elimination#Finding_the_inverse_of_a_matrix"&gt;Gaussian Elimination&lt;/a&gt;&lt;/p&gt;
+$$A A^{-1} = A^{-1}A = \mathbb{1} \mod 2$$&lt;p&gt;The simplest way of calculating $A^{-1}$ is with &lt;a href="https://en.wikipedia.org/wiki/Gaussian_elimination#Finding_the_inverse_of_a_matrix"&gt;Gaussian Elimination&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;For example, consider a matrix $A$&lt;/p&gt;
-$$A = \begin{pmatrix}0 &amp;amp; 1 &amp;amp; 0 \\ 1 &amp;amp; 0 &amp;amp; 1 \\ 1 &amp;amp; 0 &amp;amp; 0 \end{pmatrix}$$&lt;p&gt;We augment the matrix with an identity matrix to get $[A | I]$ and perform row-reduction in $A$.&lt;/p&gt;
+$$A =  \begin{pmatrix}0 &amp;amp; 1 &amp;amp; 0 \\ 1 &amp;amp; 0 &amp;amp; 1 \\ 1 &amp;amp; 0 &amp;amp; 0 \end{pmatrix}$$&lt;p&gt;We augment the matrix with an identity matrix to get $[A | I]$ and perform row-reduction on $A$.&lt;/p&gt;
 $$
+\underbrace{\left(
+\begin{array}{ccc|ccc}
+0 &amp;amp; 1 &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; 0\\ 
+1 &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 \\ 
+1 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1
+\end{array}
+\right)}_{[A|I]}
+\xrightarrow{\text{subtract (i) from (iii)}} 
+\left(
+\begin{array}{ccc|ccc}
+1 &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; 1 &amp;amp; 0\\ 
+0 &amp;amp; 1 &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; 0 \\ 
+0 &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; 1 &amp;amp; 1
+\end{array}
+\right)
 \xrightarrow{\text{swap (i) with (ii)}} 
 \left(
 \begin{array}{ccc|ccc}
@@ -1382,14 +1397,14 @@ $$&lt;/p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Test-for-random-instances"&gt;Test for random instances&lt;a class="anchor-link" href="#Test-for-random-instances"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We make sure that the function works for random instances. That is every &lt;strong&gt;invertible&lt;/strong&gt; matrix $A$ returns $A^{-1}$ such that $AA^{-1} = A^{-1}A = I$. We have to check that the matrix is invertible by looking at the determinant.&lt;/p&gt;
+&lt;h3 id="Test-for-random-instances"&gt;Test for random instances&lt;a class="anchor-link" href="#Test-for-random-instances"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We test the function over random instances of square matrices. That is every &lt;strong&gt;invertible&lt;/strong&gt; matrix $A$ returns $A^{-1}$ such that $AA^{-1} = A^{-1}A = \mathbb{1}$. We have to check that the matrix is invertible by looking at the determinant.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[5]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[10]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;scipy.linalg&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;det&lt;/span&gt;
@@ -1397,7 +1412,7 @@ $$&lt;/p&gt;
 &lt;span class="n"&gt;n_test&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
 &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;n_test&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="c1"&gt;# matrix of a random size&lt;/span&gt;
-    &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;A&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;low&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
     
     &lt;span class="c1"&gt;# make sure that the determintn in GF(2) is not zero&lt;/span&gt;
@@ -1412,6 +1427,19 @@ $$&lt;/p&gt;
     &lt;span class="k"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;allclose&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A_inv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eye&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
     &lt;span class="n"&gt;n_test&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
     
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[&amp;nbsp;]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 
 &lt;/pre&gt;&lt;/div&gt;
 
     &lt;/div&gt;

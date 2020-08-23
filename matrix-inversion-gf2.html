@@ -1252,7 +1252,7 @@ h6:hover .anchor-link {
  .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */</style><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Recently, while working with stabilizer states and <a href="https://en.wikipedia.org/wiki/Graph_state">graph states</a>, I had to take an inverse of a matrix in GF(2). I was told that <a href="https://www.sagemath.org/">SageMath</a> is great for finite-field operations for Python. But, I didn't want to install a humungous package for a simple function like matrix inversion.</p>
+<p>Recently, while working with stabilizer states and <a href="https://en.wikipedia.org/wiki/Graph_state">graph states</a>, I had to take an inverse of a matrix in GF(2). I was told that <a href="https://www.sagemath.org/">SageMath</a> is great for finite-field operations in Python. But, I didn't want to install a humungous package for a simple function like matrix inversion.</p>
 <p>It is neither a particularly challenging nor a very interesting problem to solve but it is good enough for a first post in a blog.</p>
 
 </div>
@@ -1262,10 +1262,25 @@ h6:hover .anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We are given a matrix $A$ whose elements $A_{ij} \in \{0, 1\}$. We would like to find an inverse $A^{-1}$ such that</p>
-$$A A^{-1} = A^{-1}A = \mathbb{I} \mod 2$$<p>The simplest way of calculating $A^{-1}$ is with <a href="https://en.wikipedia.org/wiki/Gaussian_elimination#Finding_the_inverse_of_a_matrix">Gaussian Elimination</a></p>
+$$A A^{-1} = A^{-1}A = \mathbb{1} \mod 2$$<p>The simplest way of calculating $A^{-1}$ is with <a href="https://en.wikipedia.org/wiki/Gaussian_elimination#Finding_the_inverse_of_a_matrix">Gaussian Elimination</a></p>
 <p>For example, consider a matrix $A$</p>
-$$A = \begin{pmatrix}0 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 1 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}$$<p>We augment the matrix with an identity matrix to get $[A | I]$ and perform row-reduction in $A$.</p>
+$$A =  \begin{pmatrix}0 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 1 \\ 1 &amp; 0 &amp; 0 \end{pmatrix}$$<p>We augment the matrix with an identity matrix to get $[A | I]$ and perform row-reduction on $A$.</p>
 $$
+\underbrace{\left(
+\begin{array}{ccc|ccc}
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\ 
+1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\ 
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1
+\end{array}
+\right)}_{[A|I]}
+\xrightarrow{\text{subtract (i) from (iii)}} 
+\left(
+\begin{array}{ccc|ccc}
+1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0\\ 
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\ 
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 1
+\end{array}
+\right)
 \xrightarrow{\text{swap (i) with (ii)}} 
 \left(
 \begin{array}{ccc|ccc}
@@ -1521,14 +1536,14 @@ $$</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Test-for-random-instances">Test for random instances<a class="anchor-link" href="#Test-for-random-instances">&#182;</a></h3><p>We make sure that the function works for random instances. That is every <strong>invertible</strong> matrix $A$ returns $A^{-1}$ such that $AA^{-1} = A^{-1}A = I$. We have to check that the matrix is invertible by looking at the determinant.</p>
+<h3 id="Test-for-random-instances">Test for random instances<a class="anchor-link" href="#Test-for-random-instances">&#182;</a></h3><p>We test the function over random instances of square matrices. That is every <strong>invertible</strong> matrix $A$ returns $A^{-1}$ such that $AA^{-1} = A^{-1}A = \mathbb{1}$. We have to check that the matrix is invertible by looking at the determinant.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">det</span>
@@ -1536,7 +1551,7 @@ $$</p>
 <span class="n">n_test</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">while</span> <span class="n">n_test</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
     <span class="c1"># matrix of a random size</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
     
     <span class="c1"># make sure that the determintn in GF(2) is not zero</span>
@@ -1551,6 +1566,19 @@ $$</p>
     <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A_inv</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
     <span class="n">n_test</span> <span class="o">+=</span> <span class="mi">1</span>
     
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
     </div>

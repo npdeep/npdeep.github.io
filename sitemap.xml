@@ -5,37 +5,44 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://npdeep.github.io/</loc>
-<lastmod>2020-07-18T00:18:39-00:00</lastmod>
+<lastmod>2020-08-23T00:17:37-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://npdeep.github.io/tags.html</loc>
-<lastmod>2020-07-18T00:18:39-00:00</lastmod>
+<lastmod>2020-08-23T00:17:37-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://npdeep.github.io/categories.html</loc>
-<lastmod>2020-07-18T00:18:39-00:00</lastmod>
+<lastmod>2020-08-23T00:17:37-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://npdeep.github.io/authors.html</loc>
-<lastmod>2020-07-18T00:18:39-00:00</lastmod>
+<lastmod>2020-08-23T00:17:37-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://npdeep.github.io/archives.html</loc>
-<lastmod>2020-07-18T00:18:39-00:00</lastmod>
+<lastmod>2020-08-23T00:17:37-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://npdeep.github.io/mpi-for-python.html</loc>
+<lastmod>2020-08-22T00:00:00-05:00</lastmod>
+<changefreq>always</changefreq>
+<priority>1</priority>
 </url>
 
 <url>
@@ -48,6 +55,34 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://npdeep.github.io/category/algorithm.html</loc>
 <lastmod>2020-07-17T00:00:00-05:00</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://npdeep.github.io/category/programming.html</loc>
+<lastmod>2020-08-22T00:00:00-05:00</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://npdeep.github.io/tag/coding.html</loc>
+<lastmod>2020-08-22T00:00:00-05:00</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://npdeep.github.io/tag/cluster.html</loc>
+<lastmod>2020-08-22T00:00:00-05:00</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://npdeep.github.io/tag/parallel-computing.html</loc>
+<lastmod>2020-08-22T00:00:00-05:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -75,7 +110,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://npdeep.github.io/author/pradeep-niroula.html</loc>
-<lastmod>2020-07-17T00:00:00-05:00</lastmod>
+<lastmod>2020-08-22T00:00:00-05:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
