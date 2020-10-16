@@ -5,37 +5,44 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://npdeep.github.io/</loc>
-<lastmod>2020-09-24T22:09:50-00:00</lastmod>
+<lastmod>2020-10-15T20:08:39-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://npdeep.github.io/tags.html</loc>
-<lastmod>2020-09-24T22:09:50-00:00</lastmod>
+<lastmod>2020-10-15T20:08:39-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://npdeep.github.io/categories.html</loc>
-<lastmod>2020-09-24T22:09:50-00:00</lastmod>
+<lastmod>2020-10-15T20:08:39-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://npdeep.github.io/authors.html</loc>
-<lastmod>2020-09-24T22:09:50-00:00</lastmod>
+<lastmod>2020-10-15T20:08:39-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://npdeep.github.io/archives.html</loc>
-<lastmod>2020-09-24T22:09:50-00:00</lastmod>
+<lastmod>2020-10-15T20:08:39-00:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://npdeep.github.io/cartpole-without-reinforcement-learning.html</loc>
+<lastmod>2020-10-15T00:00:00-05:00</lastmod>
+<changefreq>always</changefreq>
+<priority>1</priority>
 </url>
 
 <url>
@@ -67,8 +74,29 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://npdeep.github.io/category/physics-machine-learning.html</loc>
+<lastmod>2020-10-15T00:00:00-05:00</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://npdeep.github.io/category/programming.html</loc>
 <lastmod>2020-09-18T00:00:00-05:00</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://npdeep.github.io/tag/reinforcement-learning.html</loc>
+<lastmod>2020-10-15T00:00:00-05:00</lastmod>
+<changefreq>hourly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://npdeep.github.io/tag/mechanics.html</loc>
+<lastmod>2020-10-15T00:00:00-05:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -138,7 +166,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://npdeep.github.io/author/pradeep-niroula.html</loc>
-<lastmod>2020-09-18T00:00:00-05:00</lastmod>
+<lastmod>2020-10-15T00:00:00-05:00</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.5</priority>
 </url>
