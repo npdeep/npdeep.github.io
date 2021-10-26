@@ -1,0 +1,200 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Julia Madness Exhibit A : Arrays Don't Make Any Sense | Bits & Qubits</title>
+<meta name=keywords content>
+<meta name=description content="Understanding Julia&rsquo;s feelings towards arrays makes me want to go be with C instead.">
+<meta name=author content>
+<link rel=canonical href=http://npdeep.github.io/dear-julia/arrays-1/>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.6f60056d44d3f7eb69a4bc6c332b59960f3a995802bded244750232f33713c49.css integrity="sha256-b2AFbUTT9+tppLxsMytZlg86mVgCve0kR1AjLzNxPEk=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=http://npdeep.github.io/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=http://npdeep.github.io/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=http://npdeep.github.io/favicon-32x32.png>
+<link rel=apple-touch-icon href=http://npdeep.github.io/apple-touch-icon.png>
+<link rel=mask-icon href=http://npdeep.github.io/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.88.1">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript><meta property="og:title" content="Julia Madness Exhibit A : Arrays Don't Make Any Sense">
+<meta property="og:description" content="Understanding Julia&rsquo;s feelings towards arrays makes me want to go be with C instead.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://npdeep.github.io/dear-julia/arrays-1/"><meta property="article:section" content="dear-julia">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Julia Madness Exhibit A : Arrays Don't Make Any Sense">
+<meta name=twitter:description content="Understanding Julia&rsquo;s feelings towards arrays makes me want to go be with C instead.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"How I Learned to Love Julia","item":"http://npdeep.github.io/dear-julia/"},{"@type":"ListItem","position":3,"name":"Julia Madness Exhibit A : Arrays Don't Make Any Sense","item":"http://npdeep.github.io/dear-julia/arrays-1/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Julia Madness Exhibit A : Arrays Don't Make Any Sense","name":"Julia Madness Exhibit A : Arrays Don\u0027t Make Any Sense","description":"Understanding Julia\u0026rsquo;s feelings towards arrays makes me want to go be with C instead.","keywords":[],"articleBody":"  There are two kinds of people who use Julia.\n  There are many who find in Julia a shelter from the caprices from other languages. There are people who have struggled and they have the battlescars to prove it. They understand everything from RegEx to assembly instructions. They envy Lisp for what it is. When they sleep, they sometimes dream of Abstract Syntax Trees.\n  And there are others, who heard of Julia from their friends or the Internet. They got a kick out of the name. Before coming to Julia, they have spent most of their time coding in Mathematica. They have neither written a single Makefile in their life, nor do they care much about profiling the code. For them, Julia is perfection —- fast, powerful, intuitive. It just works.\n  This post documents one of my many frustrations with the non-intuitive side of Julia.\n    Take a very innocous array of integers. You might use one of them to store a simple table.  my_table = rand(1:100, 5, 5)  5×5 Array{Int64,2}: 76 41 23 5 74 87 61 36 9 95 6 61 90 14 74 52 44 1 94 21 24 83 53 19 41  Now let me write a simple function that sets the ith row to 1. Easy Peasy.  function set_row(table, row) table[row, :] .= 1 end  Let’s benchmark this function to see if I am leaking any memory.  @btime set_row(my_table, 1)  21.821 ns (1 allocation: 48 bytes)  Wait. Why is it assigning 48 bytes to this function? That’s weird. By the way, what happens if you decide to set all rows to 1?  function set_all_rows(table, 1) for row=1:5 table[row, :] .= 1 end end @btime set_all_rows(my_table)  19.852 ns (0 allocations: 0 bytes)  Okay I think I understand what is going on here. If I don’t have a function parameter like row, I don’t allocate memory. Is that really what’s going on here? Let me try to write a function that only sets the second row to be 1.  function set_second_row(table) table[2, :] .= 1 # only the second row end @btime set_second_row(my_table)  21.525 ns (1 allocation: 48 bytes)  WTF? 48 bytes allocated. If I try to set the whole array to one, I don’t allocate any memory. But if I try to set one row to one, then I somehow need to make new space for this one row.   Swapping Rows  Let’s try swapping rows.  function swap_rows(table, i, j) table[i,:], table[j,:] = table[j,:], table[i,:] end my_table = rand(1:100, 5, 5) # 5×5 Array{Int64,2}: # 58 86 80 80 55 # 52 7 1 67 54 # 67 24 62 42 20 # 62 69 22 75 83 # 25 76 16 99 31 swap_rows(my_table, 2, 4) # SWAP row 2 and 4 my_table # 5×5 Array{Int64,2}: # 58 86 80 80 55 # 62 69 22 75 83 # 67 24 62 42 20 # 52 7 1 67 54 # 25 76 16 99 31  Okay it looks like the rows have been swapped. What about memory allocation though?  @btime swap_rows(my_table, 2, 4) 118.901 ns (3 allocations: 288 bytes)  Okay this is crazy. Maybe I need to write the code in the dumbest way possible, swapping elements one at a time.  function swap_rows_dump(table, i, j) for k=1:5 temp = table[i, k] table[i,k] = table[j,k] table[j,k] = temp end end @btime swap_rows_dump(my_table, 2, 4) 17.350 ns (0 allocations: 0 bytes)  Okay, finally. Zero memory allocation.    This makes me question why I am even trying to make it work with Julia. If I cannot do simple row operations without blowing up memory, why am I not coding directly in C?  ","wordCount":"605","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"http://npdeep.github.io/dear-julia/arrays-1/"},"publisher":{"@type":"Organization","name":"Bits \u0026 Qubits","logo":{"@type":"ImageObject","url":"http://npdeep.github.io/favicon.ico"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=http://npdeep.github.io accesskey=h title="Bits & Qubits (Alt + H)">Bits & Qubits</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=http://npdeep.github.io/dear-julia/ title="Dear Julia">
+<span>Dear Julia</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<h1 class=post-title>
+Julia Madness Exhibit A : Arrays Don't Make Any Sense
+</h1>
+<div class=post-meta>
+</div>
+</header>
+<div class=post-content><ul>
+<li>
+<p>There are two kinds of people who use Julia.</p>
+</li>
+<li>
+<p>There are many who find in Julia a shelter from the caprices from other languages. There are people who have struggled and they have the battlescars to prove it. They understand everything from RegEx to assembly instructions. They envy Lisp for what it is. When they sleep, they sometimes dream of Abstract Syntax Trees.</p>
+</li>
+<li>
+<p>And there are others, who heard of Julia from their friends or the Internet. They got a kick out of the name. Before coming to Julia, they have spent most of their time coding in Mathematica. They have neither written a single Makefile in their life, nor do they care much about profiling the code. For them, Julia is perfection —- fast, powerful, intuitive. It just works.</p>
+</li>
+<li>
+<p>This post documents one of my many frustrations with the non-intuitive side of Julia.</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Take a very innocous array of integers. You might use one of them to store a simple table.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-julia data-lang=julia>my_table <span style=color:#f92672>=</span> rand(<span style=color:#ae81ff>1</span><span style=color:#f92672>:</span><span style=color:#ae81ff>100</span>, <span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>5</span>)
+
+<span style=color:#f92672>&gt;&gt;&gt;</span>
+<span style=color:#ae81ff>5</span><span style=color:#f92672>×</span><span style=color:#ae81ff>5</span> <span style=color:#66d9ef>Array</span>{<span style=color:#66d9ef>Int64</span>,<span style=color:#ae81ff>2</span>}<span style=color:#f92672>:</span>
+ <span style=color:#ae81ff>76</span>  <span style=color:#ae81ff>41</span>  <span style=color:#ae81ff>23</span>   <span style=color:#ae81ff>5</span>  <span style=color:#ae81ff>74</span>
+ <span style=color:#ae81ff>87</span>  <span style=color:#ae81ff>61</span>  <span style=color:#ae81ff>36</span>   <span style=color:#ae81ff>9</span>  <span style=color:#ae81ff>95</span>
+  <span style=color:#ae81ff>6</span>  <span style=color:#ae81ff>61</span>  <span style=color:#ae81ff>90</span>  <span style=color:#ae81ff>14</span>  <span style=color:#ae81ff>74</span>
+ <span style=color:#ae81ff>52</span>  <span style=color:#ae81ff>44</span>   <span style=color:#ae81ff>1</span>  <span style=color:#ae81ff>94</span>  <span style=color:#ae81ff>21</span>
+ <span style=color:#ae81ff>24</span>  <span style=color:#ae81ff>83</span>  <span style=color:#ae81ff>53</span>  <span style=color:#ae81ff>19</span>  <span style=color:#ae81ff>41</span>
+</code></pre></div><ul>
+<li>Now let me write a simple function that sets the <code>i</code>th row to 1. Easy Peasy.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-julia data-lang=julia><span style=color:#66d9ef>function</span> set_row(table, row)
+    table[row, <span style=color:#f92672>:</span>] <span style=color:#f92672>.=</span> <span style=color:#ae81ff>1</span>
+<span style=color:#66d9ef>end</span>
+</code></pre></div><ul>
+<li>Let&rsquo;s benchmark this function to see if I am leaking any memory.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-julia data-lang=julia><span style=color:#a6e22e>@btime</span> set_row(my_table, <span style=color:#ae81ff>1</span>)
+<span style=color:#f92672>&gt;&gt;&gt;</span> <span style=color:#ae81ff>21.821</span> ns (<span style=color:#ae81ff>1</span> allocation<span style=color:#f92672>:</span> <span style=color:#ae81ff>48</span> bytes)
+</code></pre></div><ul>
+<li>Wait. Why is it assigning 48 bytes to this function? That&rsquo;s weird.</li>
+<li>By the way, what happens if you decide to set all rows to 1?</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-julia data-lang=julia><span style=color:#66d9ef>function</span> set_all_rows(table, <span style=color:#ae81ff>1</span>)
+    <span style=color:#66d9ef>for</span> row<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span><span style=color:#f92672>:</span><span style=color:#ae81ff>5</span>
+        table[row, <span style=color:#f92672>:</span>] <span style=color:#f92672>.=</span> <span style=color:#ae81ff>1</span>
+    <span style=color:#66d9ef>end</span>
+<span style=color:#66d9ef>end</span>
+
+<span style=color:#a6e22e>@btime</span> set_all_rows(my_table)
+<span style=color:#f92672>&gt;&gt;&gt;</span> <span style=color:#ae81ff>19.852</span> ns (<span style=color:#ae81ff>0</span> allocations<span style=color:#f92672>:</span> <span style=color:#ae81ff>0</span> bytes)
+</code></pre></div><ul>
+<li>Okay I think I understand what is going on here. If I don&rsquo;t have a function parameter like <code>row</code>, I don&rsquo;t allocate memory.</li>
+<li>Is that really what&rsquo;s going on here? Let me try to write a function that only sets the second row to be 1.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-julia data-lang=julia><span style=color:#66d9ef>function</span> set_second_row(table)
+    table[<span style=color:#ae81ff>2</span>, <span style=color:#f92672>:</span>] <span style=color:#f92672>.=</span> <span style=color:#ae81ff>1</span>  <span style=color:#75715e># only the second row</span>
+<span style=color:#66d9ef>end</span>
+
+<span style=color:#a6e22e>@btime</span> set_second_row(my_table)
+<span style=color:#f92672>&gt;&gt;&gt;</span> <span style=color:#ae81ff>21.525</span> ns (<span style=color:#ae81ff>1</span> allocation<span style=color:#f92672>:</span> <span style=color:#ae81ff>48</span> bytes)
+</code></pre></div><ul>
+<li>WTF? 48 bytes allocated. If I try to set the whole array to one, I don&rsquo;t allocate any memory. But if I try to set one row to one, then I somehow need to make new space for this one row.</li>
+</ul>
+<hr>
+<h3 id=swapping-rows>Swapping Rows<a hidden class=anchor aria-hidden=true href=#swapping-rows>#</a></h3>
+<ul>
+<li>Let&rsquo;s try swapping rows.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-julia data-lang=julia><span style=color:#66d9ef>function</span> swap_rows(table, i, j)
+    table[i,<span style=color:#f92672>:</span>], table[j,<span style=color:#f92672>:</span>] <span style=color:#f92672>=</span> table[j,<span style=color:#f92672>:</span>], table[i,<span style=color:#f92672>:</span>]
+<span style=color:#66d9ef>end</span>
+
+my_table <span style=color:#f92672>=</span> rand(<span style=color:#ae81ff>1</span><span style=color:#f92672>:</span><span style=color:#ae81ff>100</span>, <span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>5</span>)
+
+<span style=color:#75715e># 5×5 Array{Int64,2}:</span>
+<span style=color:#75715e>#  58  86  80  80  55</span>
+<span style=color:#75715e>#  52   7   1  67  54</span>
+<span style=color:#75715e>#  67  24  62  42  20</span>
+<span style=color:#75715e>#  62  69  22  75  83</span>
+<span style=color:#75715e>#  25  76  16  99  31</span>
+
+swap_rows(my_table, <span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>4</span>) <span style=color:#75715e># SWAP row 2 and 4</span>
+
+my_table
+<span style=color:#75715e># 5×5 Array{Int64,2}:</span>
+<span style=color:#75715e>#  58  86  80  80  55</span>
+<span style=color:#75715e>#  62  69  22  75  83</span>
+<span style=color:#75715e>#  67  24  62  42  20</span>
+<span style=color:#75715e>#  52   7   1  67  54</span>
+<span style=color:#75715e>#  25  76  16  99  31</span>
+</code></pre></div><ul>
+<li>Okay it looks like the rows have been swapped.</li>
+<li>What about memory allocation though?</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-julia data-lang=julia><span style=color:#a6e22e>@btime</span> swap_rows(my_table, <span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>4</span>)
+ <span style=color:#ae81ff>118.901</span> ns (<span style=color:#ae81ff>3</span> allocations<span style=color:#f92672>:</span> <span style=color:#ae81ff>288</span> bytes)
+</code></pre></div><ul>
+<li>Okay this is crazy.</li>
+<li>Maybe I need to write the code in the dumbest way possible, swapping elements one at a time.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-julia data-lang=julia><span style=color:#66d9ef>function</span> swap_rows_dump(table, i, j)
+    <span style=color:#66d9ef>for</span> k<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span><span style=color:#f92672>:</span><span style=color:#ae81ff>5</span>
+        temp <span style=color:#f92672>=</span> table[i, k]
+        table[i,k] <span style=color:#f92672>=</span> table[j,k]
+        table[j,k] <span style=color:#f92672>=</span> temp
+    <span style=color:#66d9ef>end</span>
+<span style=color:#66d9ef>end</span>
+
+<span style=color:#a6e22e>@btime</span> swap_rows_dump(my_table, <span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>4</span>)
+  <span style=color:#ae81ff>17.350</span> ns (<span style=color:#ae81ff>0</span> allocations<span style=color:#f92672>:</span> <span style=color:#ae81ff>0</span> bytes)
+</code></pre></div><ul>
+<li>Okay, finally. Zero memory allocation.</li>
+</ul>
+<hr>
+<ul>
+<li>This makes me question why I am even trying to make it work with Julia.</li>
+<li>If I cannot do simple row operations without blowing up memory, why am I not coding directly in C?</li>
+</ul>
+</div>
+<footer class=post-footer>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2021 <a href=http://npdeep.github.io>Bits & Qubits</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>
